@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueCoders Text Summariser</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>BlueCoders Text Summariser</h1>
+            <p>Upload a file or paste text here.</p>
+        </header>
+
+        <main>
+            <div id="dropZone" class="drop-zone">
+                <p>Drag & Drop PDF or DOCX file here</p>
+                <p class="small-text">or</p>
+                <button type="button" class="button-secondary">
+                    Click to Upload
+                </button>
+                <input type="file" id="fileIp" class="hidden" accept=".pdf,.docx">
+            </div>
+
+            <div class="form-group">
+                <label for="ipTxt" class="label">Paste Your Text</label>
+                <textarea id="ipTxt" rows="10" class="textarea" placeholder="Paste your article, report, or any text here..."></textarea>
+            </div>
+
+            <div class="controls-grid">
+                <div>
+                    <label for="summaryLen" class="label-small">Summary Length</label>
+                    <select id="summaryLen" class="select-input">
+                        <option value="short (1-2 sentences)">Short</option>
+                        <option value="medium (a single paragraph)" selected>Medium</option>
+                        <option value="long (multiple paragraphs with key points)">Long</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="domain" class="label-small">Domain Specific Keywords</label>
+                    <input type="text" id="domain" class="text-input" placeholder="e.g., medical, technology, finance">
+                </div>
+                <div>
+                    <label for="tone" class="label-small">Voice Tone</label>
+                    <select id="tone" class="select-input">
+                        <option value="neutral and objective" selected>Neutral</option>
+                        <option value="formal and professional">Formal</option>
+                        <option value="casual and easy-to-read">Casual</option>
+                        <option value="simple, for a beginner to understand">Simple</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button id="summariseBtn" class="button-primary">
+                    summarise Text
+                </button>
+            </div>
+
+            <div id="loader" class="loader-container hidden">
+                <div class="loader"></div>
+                <p>Summarizing and extracting key terms...</p>
+            </div>
+
+            <div id="errMsg" class="error-message hidden" role="alert">
+                <strong>Error:</strong>
+                <span id="errTxt"></span>
+            </div>
+            
+            <div id="summaryBox" class="hidden">
+                <h2 class="section-title">Summary</h2>
+                <div id="summaryOp" class="summary-output-box"></div>
+                
+                <div id="keywordBox" class="mt-6">
+                     <h3 class="subsection-title">Key Terms</h3>
+                     <div id="keywordOp" class="key-terms-output-box"></div>
+                </div>
+
+                <button id="copyBtn" class="button-secondary mt-6">
+                     Copy Summary
+                </button>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
